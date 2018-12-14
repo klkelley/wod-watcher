@@ -10,5 +10,6 @@ libraryDependencies ++= Seq(
   "com.rometools" % "rome" % "1.8.1", 
   "org.scalaj" %% "scalaj-http" % "2.3.0",
   "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-  "org.scalaj" %% "scalaj-http" % "2.3.0"
+  "org.scalaj" %% "scalaj-http" % "2.3.0",
+  "com.typesafe.akka" % "akka-actor_2.10" % "2.3.8"
 )
