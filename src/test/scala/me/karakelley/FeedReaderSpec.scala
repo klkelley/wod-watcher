@@ -1,7 +1,6 @@
 package me.karakelley
 
-import java.time.format.DateTimeFormatter
-import java.time.{LocalDate, OffsetDateTime}
+import java.time.LocalDate
 
 import org.scalatest.{FreeSpec, Matchers}
 
