@@ -8,7 +8,7 @@ class NewWodChecker extends ContentChecker {
  // this class will take the content retrieval and feed reader
   override def apply(): Future[Unit] = {
     // check for new content  and send the text message
-    print("we are here")
+    println("doing the check.. ")
     Future.successful()
   }
 }

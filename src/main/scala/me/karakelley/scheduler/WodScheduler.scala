@@ -17,8 +17,6 @@ class WodScheduler(wodCheck: ContentChecker) extends Actor with Timers with Acto
 }
 
 case object WodScheduler {
-  val system: ActorSystem = ActorSystem("wodscheduler")
-
   private case object WodCheck
 
   def props(wodcheck: ContentChecker): Props = {
