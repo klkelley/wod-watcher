@@ -1,30 +1,28 @@
 package me.karakelley.scheduler
 
-import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
-import me.karakelley.WodCheck
-import scala.concurrent.duration._
+import akka.actor.{Actor, ActorLogging, ActorSystem, Props, Timers}
+import me.karakelley.ContentChecker
+import me.karakelley.scheduler.WodScheduler.WodCheck
 
-sealed trait Message
-case object Tick extends Message
 
-class WodScheduler(wodCheck: WodCheck) extends Actor with ActorLogging{
+class WodScheduler(wodCheck: ContentChecker) extends Actor with Timers with ActorLogging{
+
+  private val interval = java.time.Duration.ofMillis(200)
+  timers.startPeriodicTimer(key = WodCheck, msg = WodCheck, interval = interval)
+
   override def receive: Receive = {
-    case Tick ⇒ wodCheck()
+    case WodCheck ⇒ wodCheck()
     case unknown ⇒ log.info("something blew up")
   }
-
 }
 
 case object WodScheduler {
-  val system = ActorSystem("wodscheduler")
+  val system: ActorSystem = ActorSystem("wodscheduler")
 
-  val actor = system.actorOf(Props[WodScheduler], "WodScheduler")
+  private case object WodCheck
 
-  import system.dispatcher
-  val cancellable = system.scheduler.schedule(
-    0 milliseconds,
-    10 minutes,
-    actor ,
-    Tick)
+  def props(wodcheck: ContentChecker): Props = {
+    Props(new WodScheduler(wodcheck))
+  }
 }
 
