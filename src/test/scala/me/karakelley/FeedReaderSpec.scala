@@ -19,13 +19,13 @@ class FeedReaderSpec extends FreeSpec with Matchers with RssTestKit {
       }
     }
 
-    "it parses the last build date" in {
-//      val contentRetrieval = new FeedReader()
-//      val rssFeed = contentRetrieval.convertStringToXmlElem(sampleRss)
-//      val buildDate = contentRetrieval.getChannelLastBuildDate(rssFeed).getYear
-//
-//      val thisYear = LocalDate.now().minusYears(1).getYear
-//      buildDate shouldBe thisYear
+    "it parses the last build date" - {
+      "and returns the date" in {
+        val contentRetrieval = new FeedReader()
+        val buildDate = contentRetrieval.contentLastBuildDate(sampleRss)
+
+        buildDate.getYear shouldBe 2018
+      }
     }
   }
 }

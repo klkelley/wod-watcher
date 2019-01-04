@@ -28,3 +28,8 @@ class WodRetrievalServiceSpec extends FreeSpec with MockFactory with Matchers {
     }
   }
 }
+
+// if posted -> sends SMS
+// if not posted ->  no sms sent
+// if posted and sms already sent -- does not send another one
+

@@ -10,9 +10,7 @@ class WodRetrievalService(
   def check(url: String): Future[Unit] = {
     newContent(url) match {
       case true ⇒ Future.successful(println("sms here"))
-      case _ ⇒ {
-        Future.successful(())
-      }
+      case _ ⇒ Future.successful(())
     }
   }
 

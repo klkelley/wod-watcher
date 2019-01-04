@@ -2,14 +2,15 @@ package me.karakelley
 
 import akka.actor.ActorSystem
 import akka.testkit.{TestKit, TestProbe, _}
-import me.karakelley.WodSchedulerSpec.{MockWodChecker, Ticked}
+import me.karakelley.WodSchedulerSpec._
 import me.karakelley.scheduler.WodScheduler
 import org.scalatest.{BeforeAndAfterAll, FreeSpecLike}
+import com.typesafe.config.ConfigFactory
 
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
-class WodSchedulerSpec extends TestKit(ActorSystem("WodCheckerSpec")) with FreeSpecLike with BeforeAndAfterAll {
+class WodSchedulerSpec extends TestKit(ActorSystem("WodCheckerSpec", config)) with FreeSpecLike with BeforeAndAfterAll {
   "For WodSchedulerSpec" - {
     "given a configured interval" - {
       "it must perform the check on the expected interval" in {
@@ -32,6 +33,10 @@ class WodSchedulerSpec extends TestKit(ActorSystem("WodCheckerSpec")) with FreeS
 
 object WodSchedulerSpec {
   case object Ticked
+  final val config =
+    ConfigFactory.parseString(
+      "wodCheck.scheduler.interval = 200 milliseconds"
+    )
 
   class MockWodChecker(probe: TestProbe) extends ContentChecker {
     override def apply(): Future[Unit] =
