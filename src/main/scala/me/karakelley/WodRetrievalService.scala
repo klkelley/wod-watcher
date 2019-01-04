@@ -1,5 +1,7 @@
 package me.karakelley
 
+import java.time.{LocalDate, OffsetDateTime}
+
 import scala.concurrent.Future
 
 class WodRetrievalService(
@@ -16,7 +18,9 @@ class WodRetrievalService(
 
   def newContent(url: String): Boolean = {
    val content = contentRetrieval.getNewContent(url, 5000, 5000)
-    val lastBuildDate = feedReader.contentLastBuildDate(content)
-    java.time.LocalDate.now() == lastBuildDate
+    val lastPostedWod: OffsetDateTime = feedReader.contentLastBuildDate(content)
+    val tenMinutesAgo: OffsetDateTime = java.time.OffsetDateTime.now().minusMinutes(10)
+    val now: OffsetDateTime = java.time.OffsetDateTime.now()
+    (lastPostedWod.isAfter(tenMinutesAgo) || lastPostedWod.isEqual(tenMinutesAgo)) && lastPostedWod.isBefore(now)
   }
 }
