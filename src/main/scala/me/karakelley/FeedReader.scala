@@ -27,10 +27,18 @@ class FeedReader {
     )
   }
 
+  def contentLastBuildDate(content: String): LocalDate = {
+   val xmlElem = convertStringToXmlElem(content)
+    getChannelLastBuildDate(xmlElem)
+  }
+
   def getChannelTitle(rssFeedXml: Elem): String = (rssFeedXml \ "channel" \ "title").text
+
   def getChannelUrl(rssFeedXml: Elem): String = (rssFeedXml \ "channel" \ "link").text
+
   def getChannelDescription(rssFeedXml: Elem): String = (rssFeedXml \ "channel" \ "description").text
-  def getChannelLastBuildDate(rssFeedXml: Elem): LocalDate = {
+
+  private def getChannelLastBuildDate(rssFeedXml: Elem): LocalDate = {
     val stringLastBuildDate = (rssFeedXml \ "channel" \ "lastBuildDate").text
     val formatter = DateTimeFormatter.RFC_1123_DATE_TIME
     OffsetDateTime.parse(stringLastBuildDate, formatter).toLocalDate

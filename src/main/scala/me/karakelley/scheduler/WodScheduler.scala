@@ -1,6 +1,6 @@
 package me.karakelley.scheduler
 
-import akka.actor.{Actor, ActorLogging, ActorSystem, Props, Timers}
+import akka.actor.{Actor, ActorLogging, Props, Timers}
 import me.karakelley.ContentChecker
 import me.karakelley.scheduler.WodScheduler.WodCheck
 

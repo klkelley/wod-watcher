@@ -6,5 +6,6 @@ import me.karakelley.scheduler.WodScheduler
 object Main extends App {
   val system: ActorSystem = ActorSystem("wodscheduler")
 
-  system.actorOf(WodScheduler.props(new NewWodChecker))
+  lazy val contentRetrieval = new ContentRetrieval("https://atlasperformance.com/blog/feed/")
+  system.actorOf(WodScheduler.props(new NewWodChecker(new WodRetrievalService(contentRetrieval, new FeedReader))))
 }
