@@ -1,7 +1,21 @@
 package me.karakelley
 
-class Main {
-  def test(): Boolean = {
-    true
-  }
+import akka.actor.ActorSystem
+import com.google.inject.Guice
+import com.typesafe.config.ConfigFactory
+import me.karakelley.scheduler.WodScheduler
+
+object Main extends App {
+  val config = ConfigFactory.load()
+  val injector = Guice.createInjector(new ApplicationModule(config))
+
+  val system: ActorSystem = ActorSystem("wodscheduler", config)
+
+  lazy val contentRetrieval = new ContentRetrieval("https://atlasperformance.com/blog/feed/")
+
+  lazy val wodRetrievalService = new WodRetrievalService(contentRetrieval, new FeedReader)
+  system.actorOf(WodScheduler.props(new NewWodChecker(wodRetrievalService, new SMSClient(config), config)))
 }
+
+// todo clean up DI
+// akkamodule for di

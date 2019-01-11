@@ -1,8 +1,5 @@
 package me.karakelley
 
-import java.time.format.DateTimeFormatter
-import java.time.{LocalDate, OffsetDateTime}
-
 import org.scalatest.{FreeSpec, Matchers}
 
 
@@ -20,13 +17,13 @@ class FeedReaderSpec extends FreeSpec with Matchers with RssTestKit {
       }
     }
 
-    "it parses the last build date" in {
-      val contentRetrieval = new FeedReader()
-      val rssFeed = contentRetrieval.convertStringToXmlElem(sampleRss)
-      val buildDate = contentRetrieval.getChannelLastBuildDate(rssFeed).getYear
+    "it parses the last build date" - {
+      "and returns the date" in {
+        val contentRetrieval = new FeedReader()
+        val buildDate = contentRetrieval.contentLastBuildDate(sampleRss)
 
-      val thisYear = LocalDate.now().getYear
-      buildDate shouldBe thisYear
+        buildDate.getYear shouldBe 2018
+      }
     }
   }
 }
