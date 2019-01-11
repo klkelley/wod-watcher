@@ -2,7 +2,8 @@ package me.karakelley
 
 import scalaj.http.Http
 
-class ContentRetrieval(url: String) {
+class ContentRetrieval {
+
   def getNewContent(
     url: String,
     connectTimeout: Int = 5000,
