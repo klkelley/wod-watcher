@@ -38,7 +38,7 @@ object WodSchedulerSpec {
       "wodCheck.scheduler.interval = 200 milliseconds"
     )
 
-  class MockWodChecker(probe: TestProbe) extends ContentChecker {
+  class MockWodChecker(probe: TestProbe) extends WodChecker {
     override def apply(): Future[Unit] =
       Future.successful(probe.ref ! Ticked)
   }

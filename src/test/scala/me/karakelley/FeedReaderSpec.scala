@@ -1,7 +1,5 @@
 package me.karakelley
 
-import java.time.LocalDate
-
 import org.scalatest.{FreeSpec, Matchers}
 
 

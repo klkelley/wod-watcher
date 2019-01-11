@@ -12,7 +12,9 @@ object Main extends App {
   val system: ActorSystem = ActorSystem("wodscheduler", config)
 
   lazy val contentRetrieval = new ContentRetrieval("https://atlasperformance.com/blog/feed/")
-  system.actorOf(WodScheduler.props(new NewWodChecker(new WodRetrievalService(contentRetrieval, new FeedReader))))
+
+  lazy val wodRetrievalService = new WodRetrievalService(contentRetrieval, new FeedReader)
+  system.actorOf(WodScheduler.props(new NewWodChecker(wodRetrievalService, new SMSClient(config), config)))
 }
 
 // todo clean up DI

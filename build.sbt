@@ -16,6 +16,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.5.19",
   "com.typesafe" % "config" % "1.3.2",
   "net.codingwell" %% "scala-guice" % "4.2.2",
+  "com.twilio.sdk" % "twilio" % "7.15.5",
   "com.typesafe.akka" %% "akka-testkit" % "2.5.19" % Test,
   "org.scalamock" %% "scalamock" % "4.1.0" % Test
 )

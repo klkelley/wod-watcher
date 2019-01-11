@@ -1,6 +1,6 @@
 package me.karakelley
 
-import java.time.{LocalDate, OffsetDateTime}
+import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
 import scala.xml.{Elem, XML}
@@ -13,18 +13,24 @@ class FeedReader {
 
   def getRssFeed(rssFeedXml: Elem): RssFeed = {
     // the list of stories in the rss feed
+
+    // really should just go through this loop once to grab the first WOD - refactor this
     val rssItems = (rssFeedXml \\ "item")
     val rssFeedItems = for {
       i <- rssItems
       title = (i \ "title").text
-      url   = (i \ "link").text
       desc  = (i \ "description").text
-    } yield Wod(title, url, desc)
+    } yield Wod(title, desc)
     RssFeed(
       getChannelTitle(rssFeedXml),
       getChannelUrl(rssFeedXml),
       rssFeedItems
     )
+  }
+
+  def parseLatestWod(content: String) = {
+    val contentAsXML: Elem = convertStringToXmlElem(content)
+    getRssFeed(contentAsXML).wods.head
   }
 
   def contentLastBuildDate(content: String): OffsetDateTime = {
