@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule
 import com.typesafe.config.Config
 import net.codingwell.scalaguice.ScalaModule
 
-class ApplicationModule(config: Config) extends AbstractModule with ScalaModule{
+class ApplicationModule(config: Config) extends AbstractModule with ScalaModule {
 
   override def configure(): Unit = {
     bind[Config].toInstance(config)

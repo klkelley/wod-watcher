@@ -7,15 +7,16 @@ import com.typesafe.config.Config
 
 class SMSClient(config: Config) {
 
-  val ACCOUNT_SID = config.getString("twilio.account_sid")
-  val AUTH_TOKEN = config.getString("twilio.auth_token")
+  private val ACCOUNT_SID = config.getString("twilio.account_sid")
+  private val AUTH_TOKEN = config.getString("twilio.auth_token")
 
   Twilio.init(ACCOUNT_SID, AUTH_TOKEN)
 
-  val from = new PhoneNumber(config.getString("twilio.from_number"))
-  val to = new PhoneNumber("+13174461628")
+  private val from = new PhoneNumber(config.getString("twilio.from_number"))
+  private val to = new PhoneNumber(config.getString("twilio.to_number"))
 
   def send(wod: Wod): Message = {
     Message.creator(to, from, wod.toString).create()
   }
 }
+
