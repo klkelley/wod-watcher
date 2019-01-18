@@ -11,6 +11,7 @@ deploy:
   region: us-east-1
   app: wod-watcher
   env: WodWatcher-env
+  bucket_name: "elasticbeanstalk-us-east-2-276247375627"
   on:
     repo: klkelley/wod-watcher
     branch: feature/deployment
