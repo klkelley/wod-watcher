@@ -1,6 +1,8 @@
 name := "wod-watcher"
 
+maintainer := "Kara Kelley"
 version := "0.1"
+assemblyJarName in assembly := "wod-watcher.jar"
 
 scalaVersion := "2.12.8"
 
@@ -20,3 +22,5 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-testkit" % "2.5.19" % Test,
   "org.scalamock" %% "scalamock" % "4.1.0" % Test
 )
+
+enablePlugins(JavaAppPackaging)

@@ -11,7 +11,9 @@ class WodScheduler(wodCheck: WodChecker) extends Actor with Timers with ActorLog
   timers.startPeriodicTimer(key = WodCheck, msg = WodCheck, interval = interval)
 
   override def receive: Receive = {
-    case WodCheck ⇒ wodCheck()
+    case WodCheck ⇒
+      log.info("Checking for a new WOD")
+      wodCheck()
     case _ ⇒ log.info("something blew up")
   }
 }
