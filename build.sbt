@@ -24,3 +24,6 @@ libraryDependencies ++= Seq(
 )
 
 enablePlugins(JavaAppPackaging)
+
+herokuFatJar in Compile := Some((assemblyOutputPath in assembly).value)
+

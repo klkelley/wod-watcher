@@ -1,1 +1,1 @@
-web: java -jar target/scala-2.12/wod-watcher.jar
+worker: java -jar target/scala-2.12/wod-watcher.jar
