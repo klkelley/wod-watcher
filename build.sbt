@@ -2,6 +2,7 @@ name := "wod-watcher"
 
 maintainer := "Kara Kelley"
 version := "0.1"
+assemblyJarName in assembly := "wod-watcher.jar"
 
 scalaVersion := "2.12.8"
 
