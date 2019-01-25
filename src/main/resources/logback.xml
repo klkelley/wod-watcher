@@ -1,0 +1,13 @@
+<configuration debug="false" scan="true">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%black(%date{HH:mm:ss.SSS}) %highlight(%-5level) %white(%thread) %logger{15} %white(%X{akkaSource}) - %yellow(%msg) %n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
