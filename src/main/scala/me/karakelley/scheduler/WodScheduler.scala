@@ -14,7 +14,7 @@ class WodScheduler(wodCheck: WodChecker) extends Actor with Timers with ActorLog
     case WodCheck ⇒
       log.info("Checking for a new WOD")
       wodCheck()
-    case _ ⇒ log.info("something blew up")
+    case _ ⇒ log.info("Something blew up while checking for a new WOD")
   }
 }
 

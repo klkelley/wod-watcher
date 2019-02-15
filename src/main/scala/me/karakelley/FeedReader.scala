@@ -12,15 +12,13 @@ class FeedReader {
   }
 
   def getRssFeed(rssFeedXml: Elem): RssFeed = {
-    // the list of stories in the rss feed
-
-    // really should just go through this loop once to grab the first WOD - refactor this
     val rssItems = (rssFeedXml \\ "item")
     val rssFeedItems = for {
       i <- rssItems
       title = (i \ "title").text
       desc  = (i \ "description").text
-    } yield Wod(title, desc)
+      link = (i \ "link" ).text
+    } yield Wod(title, desc, link)
     RssFeed(
       getChannelTitle(rssFeedXml),
       getChannelUrl(rssFeedXml),
