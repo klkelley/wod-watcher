@@ -10,6 +10,5 @@ class ApplicationModule(config: Config) extends AbstractModule with ScalaModule 
     bind[Config].toInstance(config)
     val wodBlog = config.getString("wodBlog.url")
     val checkInterval = config.getString("wodCheck.scheduler.interval")
-
   }
 }

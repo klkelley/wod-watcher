@@ -13,7 +13,7 @@ class WodRetrievalServiceSpec extends FreeSpec with MockFactory with Matchers {
           val mockFeedReader = mock[FeedReader]
           val mockContentRetrieval = mock[ContentRetrieval]
           val tenMinutesAgo = OffsetDateTime.now().minusMinutes(9).minusSeconds(59)
-          val wod = Wod("date", "some value")
+          val wod = Wod("date", "some value", "some lnk")
           (mockContentRetrieval.getNewContent _)
             .expects("someUrl", 5000, 5000)
             .returning("some value")
@@ -54,7 +54,4 @@ class WodRetrievalServiceSpec extends FreeSpec with MockFactory with Matchers {
   }
 }
 
-// if posted -> sends SMS
-// if not posted ->  no sms sent
-// if posted and sms already sent -- does not send another one
 

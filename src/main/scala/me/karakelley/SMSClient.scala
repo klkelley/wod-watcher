@@ -16,7 +16,7 @@ class SMSClient(config: Config) {
   private val to = new PhoneNumber(config.getString("twilio.to_number"))
 
   def send(wod: Wod): Message = {
-    Message.creator(to, from, wod.toString).create()
+    Message.creator(to, from, wod.link.toString).create()
   }
 }
 
