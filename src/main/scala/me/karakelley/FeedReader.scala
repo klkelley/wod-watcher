@@ -43,7 +43,7 @@ class FeedReader {
   def getChannelDescription(rssFeedXml: Elem): String = (rssFeedXml \ "channel" \ "description").text
 
   private def getChannelLastBuildDate(rssFeedXml: Elem): OffsetDateTime = {
-    val stringLastBuildDate = (rssFeedXml \ "channel" \ "lastBuildDate").text
+    val stringLastBuildDate = (rssFeedXml \ "channel" \ "lastBuildDate").text.trim
     val formatter = DateTimeFormatter.RFC_1123_DATE_TIME
     OffsetDateTime.parse(stringLastBuildDate, formatter)
   }
